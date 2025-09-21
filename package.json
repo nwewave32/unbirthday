@@ -7,7 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "claude": "node .claude/commands/index.js",
+    "project:create-task": "node .claude/commands/create-task.js",
+    "code:review": "node .claude/commands/code-review.js",
+    "code:refactor": "node .claude/commands/code-refactor.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
