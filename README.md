@@ -155,3 +155,8 @@ npm run preview  # 빌드 미리보기
 ---
 
 ⭐ 이 프로젝트가 도움이 되었다면 별표를 눌러주세요!
+## 📝 Changelog
+
+- **2025-09-21 16:57:31**: Updated files: .claude/commands/docs-config.js .claude/commands/update-docs.js .claude/docs-config.json .claude/hooks/install-hooks.sh .claude/hooks/pre-commit CLAUDE.md DoD.md PRD.md README.md STYLE_GUIDE.md backlog/tasks/task-1 - Create-STYLE_GUIDE.md.md backlog/tasks/task-2 - Define-TypeScript-coding-standards.md backlog/tasks/task-3 - Define-React-component-guidelines.md backlog/tasks/task-4 - Document-styled-components-conventions.md backlog/tasks/task-5 - Establish-file-organization-standards.md backlog/tasks/task-6 - Document-Firebase-integration-patterns.md backlog/tasks/task-7 - Create-DoD.md.md docs/file-organization-standards.md docs/firebase-integration-patterns.md docs/react-guidelines.md docs/styled-components-conventions.md docs/typescript-standards.md package.json 
+
+- **2025-09-21 07:55:03**: Updated files: PRD.md, package.json, .claude/commands/update-docs.js, .claude/hooks/, DoD.md, STYLE_GUIDE.md, backlog/tasks/, docs/ (194524c: docs: create CLAUDE.md and add commands)

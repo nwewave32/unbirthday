@@ -1,0 +1,55 @@
+{
+  "watchPatterns": [
+    "**/*.{js,jsx,ts,tsx}",
+    "**/*.{py,rb,go,rs}",
+    "**/*.{json,yaml,yml}",
+    "**/*.md",
+    "package.json",
+    "Dockerfile",
+    ".env.example"
+  ],
+  "excludePatterns": [
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    "*.log",
+    ".DS_Store"
+  ],
+  "updateSections": {
+    "readme": {
+      "enabled": true,
+      "sections": [
+        "changelog",
+        "installation",
+        "usage"
+      ]
+    },
+    "claude": {
+      "enabled": true,
+      "sections": [
+        "updates",
+        "commands",
+        "workflow"
+      ]
+    }
+  },
+  "commitAnalysis": {
+    "enabled": true,
+    "keywords": {
+      "feat": "New feature",
+      "fix": "Bug fix",
+      "docs": "Documentation",
+      "style": "Code style",
+      "refactor": "Code refactoring",
+      "test": "Tests",
+      "chore": "Maintenance"
+    }
+  },
+  "autoUpdate": {
+    "onCommit": true,
+    "onPush": false,
+    "onMerge": true,
+    "generateSummary": true
+  }
+}

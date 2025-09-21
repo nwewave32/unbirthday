@@ -11,7 +11,10 @@
     "claude": "node .claude/commands/index.js",
     "project:create-task": "node .claude/commands/create-task.js",
     "code:review": "node .claude/commands/code-review.js",
-    "code:refactor": "node .claude/commands/code-refactor.js"
+    "code:refactor": "node .claude/commands/code-refactor.js",
+    "docs:update": "node .claude/commands/update-docs.js",
+    "docs:config": "node .claude/commands/docs-config.js",
+    "hooks:install": "bash .claude/hooks/install-hooks.sh"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
