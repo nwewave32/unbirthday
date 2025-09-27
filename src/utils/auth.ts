@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
+import { validatePageToken, getPageByToken } from '../firebase/services';
 
 export const generatePageUUID = (): string => {
   return uuidv4();
@@ -65,6 +66,22 @@ export const validateToken = (uuid: string, providedToken: string): boolean => {
   return storedToken === providedToken;
 };
 
+export const validateTokenWithServer = async (uuid: string, providedToken: string): Promise<boolean> => {
+  try {
+    // First check local cookie for quick validation
+    const localValidation = validateToken(uuid, providedToken);
+    if (!localValidation) {
+      return false;
+    }
+
+    // Then validate with server for authoritative check
+    return await validatePageToken(uuid, providedToken);
+  } catch (error) {
+    console.error('Error validating token with server:', error);
+    return false;
+  }
+};
+
 export const clearToken = (): void => {
   Cookies.remove(COOKIE_NAME, { path: '/' });
 };
@@ -84,5 +101,61 @@ export const cleanupExpiredTokens = (): void => {
   } catch (error) {
     console.error('Error during token cleanup:', error);
     clearToken();
+  }
+};
+
+export const getPageWithTokenValidation = async (uuid: string, token: string) => {
+  try {
+    return await getPageByToken(uuid, token);
+  } catch (error) {
+    console.error('Error getting page with token validation:', error);
+    return null;
+  }
+};
+
+export const getExistingValidToken = (): { uuid: string; token: string } | null => {
+  try {
+    const cookieValue = Cookies.get(COOKIE_NAME);
+    if (!cookieValue) return null;
+
+    const tokenData = JSON.parse(cookieValue);
+    const oneDay = 24 * 60 * 60 * 1000;
+    const isExpired = Date.now() - tokenData.createdAt > oneDay;
+
+    if (isExpired) {
+      clearToken();
+      return null;
+    }
+
+    return {
+      uuid: tokenData.uuid,
+      token: tokenData.token
+    };
+  } catch (error) {
+    console.error('Error getting existing token:', error);
+    clearToken();
+    return null;
+  }
+};
+
+export const hasValidTokenForAnyPage = async (): Promise<{ uuid: string; token: string } | null> => {
+  const existingToken = getExistingValidToken();
+  if (!existingToken) {
+    return null;
+  }
+
+  // Validate with server to ensure token is still valid
+  try {
+    const isValid = await validatePageToken(existingToken.uuid, existingToken.token);
+    if (isValid) {
+      return existingToken;
+    } else {
+      // Server says token is invalid, clear it
+      clearToken();
+      return null;
+    }
+  } catch (error) {
+    console.error('Error validating existing token with server:', error);
+    return existingToken; // Return local token if server check fails
   }
 };

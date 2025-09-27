@@ -1,49 +1,76 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import CommonButton from "../../components/ui/CommonButton";
+import { type BirthdayPage } from "../../firebase/services";
 import {
   cleanupExpiredTokens,
+  getPageWithTokenValidation,
   getStoredToken,
   parseEditPageURL,
-  validateToken,
+  validateTokenWithServer,
 } from "../../utils/auth";
 import { Container, Content, Description, Title } from "./styles";
 
 const EditPage: React.FC = () => {
   const { uuid } = useParams<{ uuid: string }>();
   const location = useLocation();
+  const navigate = useNavigate();
   const [accessStatus, setAccessStatus] = useState<
     "checking" | "valid" | "invalid" | "expired"
   >("checking");
+  const [pageData, setPageData] = useState<BirthdayPage | null>(null);
 
   const { token } = parseEditPageURL(location.pathname, location.search);
 
   useEffect(() => {
-    cleanupExpiredTokens();
+    const validateAccess = async () => {
+      cleanupExpiredTokens();
 
-    if (!uuid) {
-      setAccessStatus("invalid");
-      return;
-    }
+      if (!uuid) {
+        setAccessStatus("invalid");
+        return;
+      }
 
-    const storedToken = getStoredToken(uuid);
+      const storedToken = getStoredToken(uuid);
+      if (!storedToken) {
+        setAccessStatus("expired");
+        return;
+      }
 
-    if (!storedToken) {
-      setAccessStatus("expired");
-      return;
-    }
+      // Use token from URL if available, otherwise use stored token
+      const tokenToValidate = token || storedToken;
 
-    if (token && validateToken(uuid, token)) {
-      setAccessStatus("valid");
-    } else if (!token) {
-      setAccessStatus("valid");
-    } else {
-      setAccessStatus("invalid");
-    }
+      try {
+        // Validate with server
+        const isValid = await validateTokenWithServer(uuid, tokenToValidate);
+
+        if (isValid) {
+          // Get page data
+          const page = await getPageWithTokenValidation(uuid, tokenToValidate);
+          if (page) {
+            setPageData(page);
+            setAccessStatus("valid");
+          } else {
+            setAccessStatus("expired");
+          }
+        } else {
+          setAccessStatus("invalid");
+        }
+      } catch (error) {
+        console.error("Error validating access:", error);
+        setAccessStatus("invalid");
+      }
+    };
+
+    validateAccess();
   }, [uuid, token]);
 
   const handleBackClick = () => {
     window.history.back();
+  };
+
+  const handleCreateNewPage = () => {
+    navigate('/');
   };
 
   const getAccessStatusMessage = () => {
@@ -83,6 +110,11 @@ const EditPage: React.FC = () => {
               <br />
               <strong>저장된 토큰:</strong>{" "}
               {uuid ? getStoredToken(uuid) || "없음" : "없음"}
+              <br />
+              <strong>페이지 제목:</strong> {pageData?.title || "로딩 중..."}
+              <br />
+              <strong>페이지 설명:</strong>{" "}
+              {pageData?.description || "로딩 중..."}
             </>
           ) : (
             <>
@@ -90,10 +122,22 @@ const EditPage: React.FC = () => {
               <br />
               <br />
               {accessStatus === "expired" && (
-                <>편집 세션이 만료되었습니다. 새로 생성해주세요.</>
+                <>
+                  편집 세션이 만료되었습니다. 새로 생성해주세요.
+                  <br /><br />
+                  <CommonButton onClick={handleCreateNewPage} fullWidth>
+                    새 축하페이지 만들기
+                  </CommonButton>
+                </>
               )}
               {accessStatus === "invalid" && (
-                <>접근 권한이 없습니다. 올바른 링크를 사용해주세요.</>
+                <>
+                  접근 권한이 없습니다. 올바른 링크를 사용해주세요.
+                  <br /><br />
+                  <CommonButton onClick={handleCreateNewPage} fullWidth>
+                    새 축하페이지 만들기
+                  </CommonButton>
+                </>
               )}
             </>
           )}

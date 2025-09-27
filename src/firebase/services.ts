@@ -121,3 +121,93 @@ export const deleteFile = async (path: string) => {
 export const isPageExpired = (expiresAt: Timestamp) => {
   return Timestamp.now().toMillis() > expiresAt.toMillis();
 };
+
+// Token Management Services
+export const createPageWithToken = async (
+  uuid: string,
+  token: string,
+  pageData: Omit<BirthdayPage, 'id' | 'uuid' | 'creatorToken' | 'createdAt' | 'expiresAt' | 'currentUploadSize'>
+) => {
+  const now = Timestamp.now();
+  const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+  const expiresAt = Timestamp.fromMillis(now.toMillis() + oneDay);
+
+  const docRef = await addDoc(collection(db, 'birthdayPages'), {
+    ...pageData,
+    uuid,
+    creatorToken: token,
+    createdAt: now,
+    expiresAt,
+    currentUploadSize: 0,
+  });
+  return docRef.id;
+};
+
+export const validatePageToken = async (uuid: string, token: string): Promise<boolean> => {
+  try {
+    const page = await getBirthdayPage(uuid);
+
+    if (!page) {
+      return false;
+    }
+
+    // Check if page is expired
+    if (isPageExpired(page.expiresAt)) {
+      return false;
+    }
+
+    // Check if token matches
+    return page.creatorToken === token;
+  } catch (error) {
+    console.error('Error validating token:', error);
+    return false;
+  }
+};
+
+export const getPageByToken = async (uuid: string, token: string): Promise<BirthdayPage | null> => {
+  const isValid = await validatePageToken(uuid, token);
+  if (!isValid) {
+    return null;
+  }
+
+  return await getBirthdayPage(uuid);
+};
+
+export const updatePageToken = async (uuid: string, oldToken: string, newToken: string): Promise<boolean> => {
+  try {
+    const page = await getBirthdayPage(uuid);
+
+    if (!page || page.creatorToken !== oldToken) {
+      return false;
+    }
+
+    await updateBirthdayPage(page.id!, {
+      creatorToken: newToken,
+      // Extend expiration by 24 hours when token is updated
+      expiresAt: Timestamp.fromMillis(Timestamp.now().toMillis() + 24 * 60 * 60 * 1000)
+    });
+
+    return true;
+  } catch (error) {
+    console.error('Error updating token:', error);
+    return false;
+  }
+};
+
+export const cleanupExpiredPages = async () => {
+  try {
+    const q = query(
+      collection(db, 'birthdayPages'),
+      where('expiresAt', '<=', Timestamp.now())
+    );
+    const querySnapshot = await getDocs(q);
+
+    const deletePromises = querySnapshot.docs.map(doc => deleteDoc(doc.ref));
+    await Promise.all(deletePromises);
+
+    return querySnapshot.docs.length; // Return number of deleted pages
+  } catch (error) {
+    console.error('Error cleaning up expired pages:', error);
+    return 0;
+  }
+};
