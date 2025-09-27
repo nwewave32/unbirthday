@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 16:10:38**: Updated files: backlog/tasks/task-10 - Implement-UUID-+-temporary-token-authentication-system.md backlog/tasks/task-10.4 - Implement-token-validation-logic-for-edit-page-access.md backlog/tasks/task-10.5 - Implement-token-expiration-system-using-dayjs.md 
+
 - **2025-09-27 16:04:30**: Updated files: backlog/tasks/task-10.3 - Implement-server-side-UUID-and-token-storage-in-database.md src/firebase/services.ts src/pages/EditPage/index.tsx src/pages/LandingPage/index.tsx src/utils/auth.ts 
 
 - **2025-09-27 15:45:41**: Updated files: backlog/tasks/task-10.2 - Implement-browser-side-token-management-with-js-cookie.md src/pages/EditPage/index.tsx src/pages/EditPage/styles.ts src/pages/LandingPage/index.tsx src/utils/auth.ts 
