@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 15:45:41**: Updated files: backlog/tasks/task-10.2 - Implement-browser-side-token-management-with-js-cookie.md src/pages/EditPage/index.tsx src/pages/EditPage/styles.ts src/pages/LandingPage/index.tsx src/utils/auth.ts 
+
 - **2025-09-27 15:10:06**: Updated files: backlog/tasks/task-10.1 - Design-and-implement-UUID-based-URL-structure-for-edit-pages.md src/App.tsx src/pages/EditPage/index.tsx src/pages/LandingPage/index.tsx src/utils/auth.ts 
 
 - **2025-09-27 14:53:10**: Updated files: src/pages/EditPage/index.tsx src/pages/EditPage/styles.ts 

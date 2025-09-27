@@ -25,7 +25,7 @@ export const Title = styled.h1`
   word-break: keep-all;
 `;
 
-export const Description = styled.p`
+export const Description = styled.div`
   font-size: 1rem;
   margin-bottom: 32px;
   opacity: 0.9;
