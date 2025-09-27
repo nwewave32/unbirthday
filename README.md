@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 14:52:43**: Updated files: src/pages/LandingPage/index.tsx src/pages/LandingPage/styles.ts 
+
 - **2025-09-27 14:52:26**: Updated files: package-lock.json package.json src/App.css src/App.tsx src/firebase/services.ts src/index.css 
 
 - **2025-09-27 14:50:43**: Updated files: PRD.md README.md backlog/tasks/task-8 - Main-page-creation.md backlog/tasks/task-9 - Common-button-component-creation.md 
