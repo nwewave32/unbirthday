@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 14:52:57**: Updated files: src/components/ui/CommonButton.tsx 
+
 - **2025-09-27 14:52:43**: Updated files: src/pages/LandingPage/index.tsx src/pages/LandingPage/styles.ts 
 
 - **2025-09-27 14:52:26**: Updated files: package-lock.json package.json src/App.css src/App.tsx src/firebase/services.ts src/index.css 
