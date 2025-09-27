@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 14:52:26**: Updated files: package-lock.json package.json src/App.css src/App.tsx src/firebase/services.ts src/index.css 
+
 - **2025-09-27 14:50:43**: Updated files: PRD.md README.md backlog/tasks/task-8 - Main-page-creation.md backlog/tasks/task-9 - Common-button-component-creation.md 
 
 - **2025-09-21 16:57:31**: Updated files: .claude/commands/docs-config.js .claude/commands/update-docs.js .claude/docs-config.json .claude/hooks/install-hooks.sh .claude/hooks/pre-commit CLAUDE.md DoD.md PRD.md README.md STYLE_GUIDE.md backlog/tasks/task-1 - Create-STYLE_GUIDE.md.md backlog/tasks/task-2 - Define-TypeScript-coding-standards.md backlog/tasks/task-3 - Define-React-component-guidelines.md backlog/tasks/task-4 - Document-styled-components-conventions.md backlog/tasks/task-5 - Establish-file-organization-standards.md backlog/tasks/task-6 - Document-Firebase-integration-patterns.md backlog/tasks/task-7 - Create-DoD.md.md docs/file-organization-standards.md docs/firebase-integration-patterns.md docs/react-guidelines.md docs/styled-components-conventions.md docs/typescript-standards.md package.json
