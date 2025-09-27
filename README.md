@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-09-27 15:10:06**: Updated files: backlog/tasks/task-10.1 - Design-and-implement-UUID-based-URL-structure-for-edit-pages.md src/App.tsx src/pages/EditPage/index.tsx src/pages/LandingPage/index.tsx src/utils/auth.ts 
+
 - **2025-09-27 14:53:10**: Updated files: src/pages/EditPage/index.tsx src/pages/EditPage/styles.ts 
 
 - **2025-09-27 14:52:57**: Updated files: src/components/ui/CommonButton.tsx 

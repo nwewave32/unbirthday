@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/edit" element={<EditPage />} />
+        <Route path="/edit/:uuid" element={<EditPage />} />
       </Routes>
     </Router>
   );

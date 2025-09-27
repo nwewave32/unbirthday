@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
 import CommonButton from "../../components/ui/CommonButton";
+import { generatePageUUID, createEditPageURL } from "../../utils/auth";
 import {
   Container,
   FinalCTA,
@@ -36,7 +37,9 @@ const LandingPage: React.FC = () => {
   }, []);
 
   const handleCreateClick = () => {
-    navigate("/edit");
+    const uuid = generatePageUUID();
+    const editUrl = createEditPageURL(uuid);
+    navigate(editUrl);
   };
 
   return (
