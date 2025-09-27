@@ -7,6 +7,7 @@
 UnBirthday는 가족과 친구들이 사진, 영상, 메시지를 공유하며 참여할 수 있는 **하루만 존재하는** 특별한 생일 축하 웹사이트입니다.
 
 ### 핵심 특징
+
 - 🕐 **24시간 제한**: 생일 당일에만 접근 가능한 페이지
 - 📸 **갤러리 & 메시지**: 실시간 사진/영상 업로드 및 축하 메시지
 - 🎨 **몰입형 경험**: 인터랙티브 애니메이션 및 테마
@@ -16,6 +17,7 @@ UnBirthday는 가족과 친구들이 사진, 영상, 메시지를 공유하며 �
 ## 🛠 기술 스택
 
 ### Frontend
+
 - **React 19** + **TypeScript** + **Vite**
 - **Styled Components** - 컴포넌트 스타일링
 - **React Router DOM** - 라우팅 (랜딩/편집/참여자 페이지)
@@ -24,12 +26,14 @@ UnBirthday는 가족과 친구들이 사진, 영상, 메시지를 공유하며 �
 - **Browser Image Compression** - 이미지 최적화
 
 ### Backend & Services
+
 - **Firebase Firestore** - 메시지 및 메타데이터 저장
 - **Firebase Storage** - 이미지/영상 저장
 - **Firebase Auth** - 인증
 - **Firebase Cloud Functions** - 자동 삭제 및 알림
 
 ### Utilities
+
 - **js-cookie** - 토큰 관리
 - **uuid** - 고유 ID 생성
 - **dayjs** - 날짜 관리
@@ -52,16 +56,19 @@ src/
 ## 🎯 주요 페이지
 
 ### 1. 랜딩 페이지 (`/`)
-- 서비스 소개 및 "생일 페이지 생성하기" 버튼
+
+- 서비스 소개 및 "축하페이지 만들기" 버튼
 - 간단한 안내와 시작 버튼
 
 ### 2. 편집 페이지 (`/edit/{UUID}?token={token}`)
+
 - 생성자만 접근 가능 (토큰 기반 인증)
 - 테마 선택, 배경 이미지 설정
 - 기본 메시지 및 설정 입력
 - 참여자 링크 생성
 
 ### 3. 참여자 페이지 (`/happy-birthday/{UUID}`)
+
 - 모든 방문자가 접근 가능
 - 사진/영상/메시지 업로드
 - 실시간 갤러리 및 메시지 피드
@@ -70,10 +77,12 @@ src/
 ## 🔐 보안 및 권한
 
 ### 권한 구조
+
 - **생성자**: 편집, 삭제, 설정 변경 가능 (토큰 기반)
 - **참여자**: 메시지/사진 업로드만 가능
 
 ### 보안 기능
+
 - UUID 기반 난수화된 URL
 - 브라우저 세션 기반 임시 토큰
 - 파일 업로드 용량 및 확장자 제한
@@ -82,29 +91,35 @@ src/
 ## 📦 설치 및 실행
 
 ### 환경 설정
+
 1. 저장소 클론
+
 ```bash
 git clone https://github.com/nwewave32/unbirthday.git
 cd unbirthday
 ```
 
 2. 의존성 설치
+
 ```bash
 npm install
 ```
 
 3. 환경변수 설정
+
 ```bash
 cp .env.example .env
 # .env 파일에 Firebase 설정 입력
 ```
 
 4. 개발 서버 실행
+
 ```bash
 npm run dev
 ```
 
 ### 빌드 및 배포
+
 ```bash
 npm run build    # 프로덕션 빌드
 npm run preview  # 빌드 미리보기
@@ -113,16 +128,19 @@ npm run preview  # 빌드 미리보기
 ## 🎪 구독 모델
 
 ### 무료 플랜
+
 - 기본 테마 1종
 - 업로드 50MB 제한
 - 기본 기능 제공
 
 ### 프리미엄 (월 3,000원)
+
 - 추가 테마 및 애니메이션
 - 업로드 200MB
 - 배경음악 및 GIF 지원
 
 ### VIP (월 5,000~6,000원)
+
 - 무제한 테마 및 용량
 - PDF/앨범 다운로드
 - 하루 후 기록 보관
@@ -155,8 +173,11 @@ npm run preview  # 빌드 미리보기
 ---
 
 ⭐ 이 프로젝트가 도움이 되었다면 별표를 눌러주세요!
+
 ## 📝 Changelog
 
-- **2025-09-21 16:57:31**: Updated files: .claude/commands/docs-config.js .claude/commands/update-docs.js .claude/docs-config.json .claude/hooks/install-hooks.sh .claude/hooks/pre-commit CLAUDE.md DoD.md PRD.md README.md STYLE_GUIDE.md backlog/tasks/task-1 - Create-STYLE_GUIDE.md.md backlog/tasks/task-2 - Define-TypeScript-coding-standards.md backlog/tasks/task-3 - Define-React-component-guidelines.md backlog/tasks/task-4 - Document-styled-components-conventions.md backlog/tasks/task-5 - Establish-file-organization-standards.md backlog/tasks/task-6 - Document-Firebase-integration-patterns.md backlog/tasks/task-7 - Create-DoD.md.md docs/file-organization-standards.md docs/firebase-integration-patterns.md docs/react-guidelines.md docs/styled-components-conventions.md docs/typescript-standards.md package.json 
+- **2025-09-27 14:50:43**: Updated files: PRD.md README.md backlog/tasks/task-8 - Main-page-creation.md backlog/tasks/task-9 - Common-button-component-creation.md 
+
+- **2025-09-21 16:57:31**: Updated files: .claude/commands/docs-config.js .claude/commands/update-docs.js .claude/docs-config.json .claude/hooks/install-hooks.sh .claude/hooks/pre-commit CLAUDE.md DoD.md PRD.md README.md STYLE_GUIDE.md backlog/tasks/task-1 - Create-STYLE_GUIDE.md.md backlog/tasks/task-2 - Define-TypeScript-coding-standards.md backlog/tasks/task-3 - Define-React-component-guidelines.md backlog/tasks/task-4 - Document-styled-components-conventions.md backlog/tasks/task-5 - Establish-file-organization-standards.md backlog/tasks/task-6 - Document-Firebase-integration-patterns.md backlog/tasks/task-7 - Create-DoD.md.md docs/file-organization-standards.md docs/firebase-integration-patterns.md docs/react-guidelines.md docs/styled-components-conventions.md docs/typescript-standards.md package.json
 
 - **2025-09-21 07:55:03**: Updated files: PRD.md, package.json, .claude/commands/update-docs.js, .claude/hooks/, DoD.md, STYLE_GUIDE.md, backlog/tasks/, docs/ (194524c: docs: create CLAUDE.md and add commands)
