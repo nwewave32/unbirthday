@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { Input } from '../ui/Input';
 
 export interface MusicPickerProps {
   enabled: boolean;
@@ -144,40 +145,17 @@ const TabContent = styled.div`
   padding: ${({ theme }) => theme.spacing.m} 0;
 `;
 
-const InputWrapper = styled.div`
+const FileUploadSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
 `;
 
-const InputLabel = styled.label`
+const FileUploadLabel = styled.label`
   font-family: ${({ theme }) => theme.typography.fontFamily.base};
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   color: ${({ theme }) => theme.colors.text.primary};
-`;
-
-const UrlInput = styled.input`
-  width: 100%;
-  height: 48px;
-  padding: 0 ${({ theme }) => theme.spacing.m};
-  border-radius: ${({ theme }) => theme.borderRadius.s};
-  border: 1.5px solid ${({ theme }) => theme.colors.border.secondary};
-  font-family: ${({ theme }) => theme.typography.fontFamily.base};
-  font-size: ${({ theme }) => theme.typography.fontSize.s};
-  color: ${({ theme }) => theme.colors.text.primary};
-  background: ${({ theme }) => theme.colors.background.primary};
-  transition: all ${({ theme }) => theme.transitions.fast};
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.border.active};
-    box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.12);
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.text.disabled};
-  }
 `;
 
 const FileUploadButton = styled.label`
@@ -324,20 +302,19 @@ export const MusicPicker: React.FC<MusicPickerProps> = ({
 
           <TabContent>
             {activeTab === 'url' && allowUrl && onUrlChange && (
-              <InputWrapper>
-                <InputLabel>Music URL</InputLabel>
-                <UrlInput
-                  type="url"
-                  placeholder="https://example.com/music.mp3"
-                  value={musicUrl || ''}
-                  onChange={(e) => onUrlChange(e.target.value)}
-                />
-              </InputWrapper>
+              <Input
+                type="url"
+                label="Music URL"
+                placeholder="https://example.com/music.mp3"
+                value={musicUrl || ''}
+                onChange={(e) => onUrlChange(e.target.value)}
+                fullWidth
+              />
             )}
 
             {activeTab === 'file' && allowFile && onFileSelect && (
-              <InputWrapper>
-                <InputLabel>Upload Audio File</InputLabel>
+              <FileUploadSection>
+                <FileUploadLabel>Upload Audio File</FileUploadLabel>
                 <FileUploadButton>
                   <UploadIconSvg />
                   Choose File
@@ -354,7 +331,7 @@ export const MusicPicker: React.FC<MusicPickerProps> = ({
                     {selectedFileName}
                   </SelectedFile>
                 )}
-              </InputWrapper>
+              </FileUploadSection>
             )}
           </TabContent>
         </OptionsContainer>

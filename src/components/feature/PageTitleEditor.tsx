@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Input } from '../ui/Input';
 
 export interface PageTitleEditorProps {
   value: string;
@@ -74,41 +75,6 @@ const StyledInput = styled.input<{ error?: boolean; hasValue?: boolean }>`
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSize.xxl};
     padding: ${({ theme }) => theme.spacing.s} ${({ theme }) => theme.spacing.m};
-  }
-`;
-
-const DateInput = styled.input<{ error?: boolean }>`
-  width: 100%;
-  height: 56px;
-  padding: 0 ${({ theme }) => theme.spacing.m};
-  border-radius: ${({ theme }) => theme.borderRadius.s};
-  border: 1.5px solid
-    ${({ theme, error }) => (error ? theme.colors.error : theme.colors.border.secondary)};
-  font-family: ${({ theme }) => theme.typography.fontFamily.base};
-  font-size: ${({ theme }) => theme.typography.fontSize.m};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  color: ${({ theme }) => theme.colors.text.primary};
-  background: ${({ theme }) => theme.colors.background.primary};
-  transition: all ${({ theme }) => theme.transitions.fast};
-  outline: none;
-
-  &::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    filter: invert(0);
-  }
-
-  &:hover {
-    border-color: ${({ theme, error }) =>
-      error ? theme.colors.error : theme.colors.border.primary};
-  }
-
-  &:focus {
-    border-color: ${({ theme, error }) => (error ? theme.colors.error : theme.colors.border.active)};
-    box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.12);
-  }
-
-  @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.typography.fontSize.s};
   }
 `;
 
@@ -188,11 +154,16 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   };
 
   return (
-    <InputWrapper className={className}>
-      {label && <Label>{label}</Label>}
-      <DateInput type="date" value={value} onChange={handleChange} error={error} />
-      {error && errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </InputWrapper>
+    <Input
+      type="date"
+      value={value}
+      onChange={handleChange}
+      label={label}
+      error={error}
+      errorMessage={errorMessage}
+      className={className}
+      fullWidth
+    />
   );
 };
 

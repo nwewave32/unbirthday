@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Badge } from '../ui/Badge';
 
 export type LayoutType = 'grid' | 'masonry';
 export type HeroStyle = 'full' | 'split' | 'minimal' | 'none';
@@ -131,17 +132,10 @@ const OptionDescription = styled.div`
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
-const SelectedBadge = styled.div`
+const SelectedBadgeWrapper = styled.div`
   position: absolute;
   top: ${({ theme }) => theme.spacing.s};
   right: ${({ theme }) => theme.spacing.s};
-  background: ${({ theme }) => theme.colors.success};
-  color: ${({ theme }) => theme.colors.white};
-  padding: 4px 8px;
-  border-radius: ${({ theme }) => theme.borderRadius.s};
-  font-family: ${({ theme }) => theme.typography.fontFamily.base};
-  font-size: 10px;
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
 `;
 
 const HeroPreviewGrid = styled.div`
@@ -339,7 +333,13 @@ export const LayoutPicker: React.FC<LayoutPickerProps> = ({
                 onClick={() => onLayoutChange(option.id)}
                 type="button"
               >
-                {isSelected && <SelectedBadge>Selected</SelectedBadge>}
+                {isSelected && (
+                  <SelectedBadgeWrapper>
+                    <Badge variant="success" size="s">
+                      Selected
+                    </Badge>
+                  </SelectedBadgeWrapper>
+                )}
                 <IconWrapper selected={isSelected}>{option.icon}</IconWrapper>
                 <OptionInfo>
                   <OptionName>{option.name}</OptionName>
@@ -366,7 +366,13 @@ export const LayoutPicker: React.FC<LayoutPickerProps> = ({
                 onClick={() => onHeroStyleChange(option.id)}
                 type="button"
               >
-                {isSelected && <SelectedBadge>Selected</SelectedBadge>}
+                {isSelected && (
+                  <SelectedBadgeWrapper>
+                    <Badge variant="success" size="s">
+                      Selected
+                    </Badge>
+                  </SelectedBadgeWrapper>
+                )}
                 <PreviewWrapper>{option.preview}</PreviewWrapper>
                 <OptionInfo>
                   <OptionName>{option.name}</OptionName>

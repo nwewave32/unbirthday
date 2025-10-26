@@ -1,5 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
 
 export interface EditHeaderBarProps {
   title: string;
@@ -60,34 +63,6 @@ const RightSection = styled.div`
   flex: 0 1 auto;
 `;
 
-const BackButton = styled.button`
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: ${({ theme }) => theme.spacing.s};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.colors.text.primary};
-  transition: all ${({ theme }) => theme.transitions.fast};
-  border-radius: ${({ theme }) => theme.borderRadius.s};
-  width: 40px;
-  height: 40px;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.background.hover};
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  svg {
-    width: 24px;
-    height: 24px;
-  }
-`;
-
 const Title = styled.h1`
   font-family: ${({ theme }) => theme.typography.fontFamily.display};
   font-size: ${({ theme }) => theme.typography.fontSize.xl};
@@ -103,86 +78,21 @@ const Title = styled.h1`
   }
 `;
 
-const SaveButton = styled.button<{ loading?: boolean }>`
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.text.inverse};
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  padding: ${({ theme }) => `${theme.spacing.s} ${theme.spacing.l}`};
-  font-family: ${({ theme }) => theme.typography.fontFamily.base};
-  font-size: ${({ theme }) => theme.typography.fontSize.s};
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
-  cursor: pointer;
-  transition: all ${({ theme }) => theme.transitions.normal};
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.s};
-  min-width: 80px;
-  height: 40px;
+const SaveButtonWrapper = styled.div`
+  button {
+    min-width: 80px;
 
-  &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.colors.grey[700]};
-  }
-
-  &:active:not(:disabled) {
-    transform: scale(0.98);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background: ${({ theme }) => theme.colors.background.disabled};
-    color: ${({ theme }) => theme.colors.text.disabled};
-  }
-
-  ${({ loading }) =>
-    loading &&
-    `
-    opacity: 0.7;
-    cursor: not-allowed;
-    position: relative;
-
-    &:after {
-      content: '';
-      width: 16px;
-      height: 16px;
-      margin-left: 8px;
-      border: 2px solid transparent;
-      border-top: 2px solid currentColor;
-      border-radius: 50%;
-      display: inline-block;
-      animation: spin 1s linear infinite;
+    @media (max-width: 768px) {
+      min-width: 70px;
     }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  `}
-
-  @media (max-width: 768px) {
-    padding: ${({ theme }) => `${theme.spacing.s} ${theme.spacing.m}`};
-    font-size: ${({ theme }) => theme.typography.fontSize.xs};
-    min-width: 70px;
   }
 `;
-
-const BackIcon = () => (
-  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-  </svg>
-);
 
 export const EditHeaderBar: React.FC<EditHeaderBarProps> = ({
   title,
   onBack,
   onSave,
-  saveLabel = 'Save',
+  saveLabel = "Save",
   saveDisabled = false,
   saveLoading = false,
   showBackButton = true,
@@ -194,9 +104,9 @@ export const EditHeaderBar: React.FC<EditHeaderBarProps> = ({
       <InnerContainer>
         <LeftSection>
           {showBackButton && onBack && (
-            <BackButton onClick={onBack} aria-label="Go back">
-              <BackIcon />
-            </BackButton>
+            <IconButton onClick={onBack} variant="ghost" aria-label="Go back">
+              <ChevronLeftIcon />
+            </IconButton>
           )}
         </LeftSection>
 
@@ -206,9 +116,16 @@ export const EditHeaderBar: React.FC<EditHeaderBarProps> = ({
 
         <RightSection>
           {showSaveButton && onSave && (
-            <SaveButton onClick={onSave} disabled={saveDisabled || saveLoading} loading={saveLoading}>
-              {saveLabel}
-            </SaveButton>
+            <SaveButtonWrapper>
+              <Button
+                onClick={onSave}
+                disabled={saveDisabled || saveLoading}
+                loading={saveLoading}
+                size="s"
+              >
+                {saveLabel}
+              </Button>
+            </SaveButtonWrapper>
           )}
         </RightSection>
       </InnerContainer>

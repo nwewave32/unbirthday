@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Badge } from '../ui/Badge';
 
 export interface ThemeOption {
   id: string;
@@ -123,17 +124,10 @@ const ThemeDetails = styled.div`
   color: ${({ theme }) => theme.colors.text.secondary};
 `;
 
-const SelectedBadge = styled.div`
+const SelectedBadgeWrapper = styled.div`
   position: absolute;
   top: ${({ theme }) => theme.spacing.s};
   right: ${({ theme }) => theme.spacing.s};
-  background: ${({ theme }) => theme.colors.success};
-  color: ${({ theme }) => theme.colors.white};
-  padding: 4px 8px;
-  border-radius: ${({ theme }) => theme.borderRadius.s};
-  font-family: ${({ theme }) => theme.typography.fontFamily.base};
-  font-size: 10px;
-  font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   display: flex;
   align-items: center;
   gap: 4px;
@@ -167,10 +161,12 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({
             >
               <ThemePreview background={theme.background} textColor={theme.textColor}>
                 {isSelected && (
-                  <SelectedBadge>
-                    <CheckIcon />
-                    Selected
-                  </SelectedBadge>
+                  <SelectedBadgeWrapper>
+                    <Badge variant="success" size="s">
+                      <CheckIcon />
+                      Selected
+                    </Badge>
+                  </SelectedBadgeWrapper>
                 )}
                 <PreviewHeading fontFamily={theme.fontFamily}>
                   {theme.preview?.heading || 'Happy Birthday!'}

@@ -1,11 +1,11 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 export interface InputProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "date";
   disabled?: boolean;
   error?: boolean;
   errorMessage?: string;
@@ -89,7 +89,7 @@ export const Input: React.FC<InputProps> = ({
   value,
   onChange,
   placeholder,
-  type = 'text',
+  type = "text",
   disabled = false,
   error = false,
   errorMessage,

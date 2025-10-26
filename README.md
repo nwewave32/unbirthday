@@ -176,6 +176,8 @@ npm run preview  # 빌드 미리보기
 
 ## 📝 Changelog
 
+- **2025-10-26 20:26:36**: Updated files: src/App.css src/components/feature/EditHeaderBar.tsx src/components/feature/LayoutPicker.tsx src/components/feature/MusicPicker.tsx src/components/feature/PageTitleEditor.tsx src/components/feature/ThemePicker.tsx src/components/ui/IconButton.tsx src/components/ui/Input.tsx src/components/ui/index.ts src/index.css 
+
 - **2025-10-26 14:36:12**: Updated files: src/App.tsx src/assets/react.svg src/assets/theme.json src/components/feature/EditHeaderBar.tsx src/components/feature/LayoutPicker.tsx src/components/feature/MusicPicker.tsx src/components/feature/PageTitleEditor.tsx src/components/feature/ThemePicker.tsx src/components/feature/index.ts src/components/ui/Badge.tsx src/components/ui/BottomActionBar.tsx src/components/ui/Button.tsx src/components/ui/Card.tsx src/components/ui/CommonButton.tsx src/components/ui/FullScreenOverlay.tsx src/components/ui/Input.tsx src/components/ui/Modal.tsx src/components/ui/Toast.tsx src/components/ui/Typography.tsx src/components/ui/index.ts src/context/ToastContext.ts src/hooks/useToast.ts src/main.tsx src/pages/ComponentsPage/index.tsx src/pages/EditPage/index.tsx src/pages/LandingPage/index.tsx src/theme/ThemeProvider.tsx src/theme/styled.d.ts src/theme/theme.ts 
 
 - **2025-09-27 16:10:38**: Updated files: backlog/tasks/task-10 - Implement-UUID-+-temporary-token-authentication-system.md backlog/tasks/task-10.4 - Implement-token-validation-logic-for-edit-page-access.md backlog/tasks/task-10.5 - Implement-token-expiration-system-using-dayjs.md 
