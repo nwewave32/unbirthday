@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import CommonButton from "../../components/ui/CommonButton";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+import { Button } from "../../components/ui";
 import { type BirthdayPage } from "../../firebase/services";
 import {
   cleanupExpiredTokens,
@@ -70,7 +71,7 @@ const EditPage: React.FC = () => {
   };
 
   const handleCreateNewPage = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const getAccessStatusMessage = () => {
@@ -124,27 +125,29 @@ const EditPage: React.FC = () => {
               {accessStatus === "expired" && (
                 <>
                   편집 세션이 만료되었습니다. 새로 생성해주세요.
-                  <br /><br />
-                  <CommonButton onClick={handleCreateNewPage} fullWidth>
+                  <br />
+                  <br />
+                  <Button onClick={handleCreateNewPage} fullWidth>
                     새 축하페이지 만들기
-                  </CommonButton>
+                  </Button>
                 </>
               )}
               {accessStatus === "invalid" && (
                 <>
                   접근 권한이 없습니다. 올바른 링크를 사용해주세요.
-                  <br /><br />
-                  <CommonButton onClick={handleCreateNewPage} fullWidth>
+                  <br />
+                  <br />
+                  <Button onClick={handleCreateNewPage} fullWidth>
                     새 축하페이지 만들기
-                  </CommonButton>
+                  </Button>
                 </>
               )}
             </>
           )}
         </Description>
-        <CommonButton onClick={handleBackClick} variant="secondary" fullWidth>
+        <Button onClick={handleBackClick} variant="secondary" fullWidth>
           메인으로 돌아가기
-        </CommonButton>
+        </Button>
       </Content>
     </Container>
   );

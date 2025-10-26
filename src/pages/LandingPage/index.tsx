@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { useNavigate } from "react-router-dom";
-import CommonButton from "../../components/ui/CommonButton";
+
+import Button from "../../components/ui/Button";
 import { createPageWithToken } from "../../firebase/services";
 import {
   createEditPageURL,
@@ -120,13 +121,13 @@ const LandingPage: React.FC = () => {
       <Section1>
         <Title>특별한 생일을 선물하세요!</Title>
         {checkingExisting ? (
-          <CommonButton disabled fullWidth>
+          <Button disabled fullWidth>
             확인 중...
-          </CommonButton>
+          </Button>
         ) : (
-          <CommonButton onClick={handleCreateClick} fullWidth>
+          <Button onClick={handleCreateClick} fullWidth>
             {existingPage ? "내 축하페이지 편집하기" : "축하페이지 만들기"}
-          </CommonButton>
+          </Button>
         )}
         {existingPage && !checkingExisting && (
           <p style={{ marginTop: "10px", fontSize: "0.9rem", opacity: 0.8 }}>
@@ -154,13 +155,13 @@ const LandingPage: React.FC = () => {
         <FinalCTA>
           <h2>지금 생일을 축하하러 가요!</h2>
           {checkingExisting ? (
-            <CommonButton disabled fullWidth>
+            <Button disabled fullWidth>
               확인 중...
-            </CommonButton>
+            </Button>
           ) : (
-            <CommonButton onClick={handleCreateClick} fullWidth>
+            <Button onClick={handleCreateClick} fullWidth>
               {existingPage ? "내 축하페이지 편집하기" : "축하페이지 만들기"}
-            </CommonButton>
+            </Button>
           )}
         </FinalCTA>
       </Section4>
